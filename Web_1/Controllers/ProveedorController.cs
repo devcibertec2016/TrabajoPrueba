@@ -17,12 +17,14 @@ namespace Web_1.Controllers
         // GET: /Proveedor/
         public ActionResult Index()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             return View(db.tTR_Proveedor.ToList());
         }
 
         // GET: /Proveedor/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +40,7 @@ namespace Web_1.Controllers
         // GET: /Proveedor/Create
         public ActionResult Create()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             return View();
         }
 
@@ -46,8 +49,9 @@ namespace Web_1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="vNombreProveedor,vRuc,vDireccion,vTelefono1,vTelefono2,iEstado")] tTR_Proveedor ttr_proveedor)
+        public ActionResult Create([Bind(Include = "vNombreProveedor,vRuc,vDireccion,vTelefono1,vTelefono2,iEstado")] tTR_Proveedor ttr_proveedor)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.tTR_Proveedor.Add(ttr_proveedor);
@@ -61,6 +65,7 @@ namespace Web_1.Controllers
         // GET: /Proveedor/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -78,9 +83,10 @@ namespace Web_1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="iIdProveedor,vNombreProveedor,vRuc,vDireccion,vTelefono1,vTelefono2,iEstado")] tTR_Proveedor ttr_proveedor)
+        public ActionResult Edit([Bind(Include = "iIdProveedor,vNombreProveedor,vRuc,vDireccion,vTelefono1,vTelefono2,iEstado")] tTR_Proveedor ttr_proveedor)
         {
-        if (ModelState.IsValid)
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
+            if (ModelState.IsValid)
             {
                 db.Entry(ttr_proveedor).State = EntityState.Modified;
                 db.SaveChanges();
@@ -106,6 +112,7 @@ namespace Web_1.Controllers
         // GET: /Proveedor/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             int Idelete = 0;
             if (id == null)
             {
@@ -127,6 +134,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             tTR_Proveedor ttr_proveedor = db.tTR_Proveedor.Find(id);
             db.tTR_Proveedor.Remove(ttr_proveedor);
             db.SaveChanges();

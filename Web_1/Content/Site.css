@@ -202,3 +202,26 @@ input[type="checkbox"].input-validation-error {
     border-top: 2px solid #ABABAB;
 }
 
+/*
+    LOGIN
+    */
+
+.Login {
+    width:800px;
+    height:100px;
+    float:inherit;
+    text-align : center;
+    padding:30px;
+    margin:30px;
+}
+
+    .Login h1,h5 {
+        text-transform:uppercase;
+        text-decoration:dotted;
+        margin:20px;
+        color:#808080;
+        font-family:Tahoma,'Comic Sans MS';
+    }
+    .login button {
+        margin:20px;
+    }

@@ -10,13 +10,13 @@ namespace Web_1.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

@@ -17,6 +17,7 @@ namespace Web_1.Controllers
         // GET: /Productos/
         public ActionResult Index()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             var ttr_producto = db.tTR_Producto.Include(t => t.tTR_Categoria);
             return View(ttr_producto.ToList());
         }
@@ -24,6 +25,7 @@ namespace Web_1.Controllers
         // GET: /Productos/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +41,7 @@ namespace Web_1.Controllers
         // GET: /Productos/Create
         public ActionResult Create()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             ViewBag.iIdCategoria = new SelectList(db.tTR_Categoria, "iIdCategoria", "vNombreCategoria");
             ViewBag.iIdProveedor = new SelectList(db.tTR_Proveedor, "iIdProveedor", "vNombreProveedor");
             return View();
@@ -51,6 +54,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="iIdProducto,iIdCategoria,vNombreProducto,vDescripcionProducto,nPrecioCompra,nPrecioVenta,iStockActual,iStockMinimo,iEstado,iIdProveedor")] tTR_Producto ttr_producto)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.tTR_Producto.Add(ttr_producto);
@@ -66,6 +70,7 @@ namespace Web_1.Controllers
         // GET: /Productos/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +92,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="iIdProducto,iIdCategoria,vNombreProducto,vDescripcionProducto,nPrecioCompra,nPrecioVenta,iStockActual,iStockMinimo,iEstado,iIdProveedor")] tTR_Producto ttr_producto)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.Entry(ttr_producto).State = EntityState.Modified;
@@ -101,6 +107,7 @@ namespace Web_1.Controllers
         // GET: /Productos/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +125,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             tTR_Producto ttr_producto = db.tTR_Producto.Find(id);
             db.tTR_Producto.Remove(ttr_producto);
             db.SaveChanges();

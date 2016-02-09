@@ -17,6 +17,7 @@ namespace Web_1.Controllers
         // GET: /Usuario/
         public ActionResult Index()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             var ttr_usuarios = db.tTR_Usuarios.Include(t => t.tTR_Roles);
             return View(ttr_usuarios.ToList());
         }
@@ -24,6 +25,7 @@ namespace Web_1.Controllers
         // GET: /Usuario/Details/5
         public ActionResult Details(string id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +41,7 @@ namespace Web_1.Controllers
         // GET: /Usuario/Create
         public ActionResult Create()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             ViewBag.iIdRol = new SelectList(db.tTR_Roles, "iIdUsuario", "vNombreRol");
             return View();
         }
@@ -50,6 +53,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.tTR_Usuarios.Add(ttr_usuarios);
@@ -64,6 +68,7 @@ namespace Web_1.Controllers
         // GET: /Usuario/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +89,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.Entry(ttr_usuarios).State = EntityState.Modified;
@@ -114,6 +120,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             tTR_Usuarios ttr_usuarios = db.tTR_Usuarios.Find(id);
             db.tTR_Usuarios.Remove(ttr_usuarios);
             db.SaveChanges();

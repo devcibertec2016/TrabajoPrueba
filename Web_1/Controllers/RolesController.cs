@@ -17,12 +17,14 @@ namespace Web_1.Controllers
         // GET: /Roles/
         public ActionResult Index()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             return View(db.tTR_Roles.ToList());
         }
 
         // GET: /Roles/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -48,6 +50,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="iIdUsuario,vNombreRol,iEstado")] tTR_Roles ttr_roles)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.tTR_Roles.Add(ttr_roles);
@@ -61,6 +64,7 @@ namespace Web_1.Controllers
         // GET: /Roles/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +84,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="iIdUsuario,vNombreRol,iEstado")] tTR_Roles ttr_roles)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.Entry(ttr_roles).State = EntityState.Modified;
@@ -104,6 +109,7 @@ namespace Web_1.Controllers
         // GET: /Roles/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             int Idelete = 0;
             if (id == null)
             {
@@ -124,6 +130,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             tTR_Roles ttr_roles = db.tTR_Roles.Find(id);
             db.tTR_Roles.Remove(ttr_roles);
             db.SaveChanges();

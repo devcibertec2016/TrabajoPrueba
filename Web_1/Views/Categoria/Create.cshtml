@@ -13,6 +13,12 @@
 {
     @Html.AntiForgeryToken()
 
+    //Datos.tTR_Usuarios objdatos = new Datos.tTR_Usuarios();
+    //objdatos = (Datos.tTR_Usuarios)Session["LogeoUsuario"];
+    //if (objdatos != null)
+    //{
+
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)
@@ -44,7 +50,13 @@
             </div>
         </div>
     </div>
+    @*}
+        else
+        {
+            Response.Redirect("~/Home");
+        }*@
 }
+
 
 <div>
     @Html.ActionLink("Regresar", "Index")

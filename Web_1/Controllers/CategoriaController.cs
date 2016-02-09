@@ -16,13 +16,16 @@ namespace Web_1.Controllers
 
         // GET: /Categoria/
         public ActionResult Index()
+        
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             return View(db.tTR_Categoria.ToList());
         }
 
         // GET: /Categoria/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +41,7 @@ namespace Web_1.Controllers
         // GET: /Categoria/Create
         public ActionResult Create()
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             return View();
         }
 
@@ -48,6 +52,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="iIdCategoria,vNombreCategoria,iEstado")] tTR_Categoria ttr_categoria)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.tTR_Categoria.Add(ttr_categoria);
@@ -61,6 +66,7 @@ namespace Web_1.Controllers
         // GET: /Categoria/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +86,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="iIdCategoria,vNombreCategoria,iEstado")] tTR_Categoria ttr_categoria)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
                 db.Entry(ttr_categoria).State = EntityState.Modified;
@@ -108,6 +115,7 @@ namespace Web_1.Controllers
         // GET: /Categoria/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             int Idelete = 0;
 
             if (id == null)
@@ -131,6 +139,7 @@ namespace Web_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             tTR_Categoria ttr_categoria = db.tTR_Categoria.Find(id);
             db.tTR_Categoria.Remove(ttr_categoria);
             db.SaveChanges();

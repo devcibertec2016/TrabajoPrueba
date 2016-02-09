@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,6 +8,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+<script type="text/javascript">
+    var VG_RUTA_SERVIDOR = "@Url.Content("~")";
+</script>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -18,14 +22,48 @@
                 </button>
                 @Html.ActionLink("Cibertec", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
+            <div class="nav-justified" style="text-align:right;">
+                <ul class="nav navbar-nav">
+                    @{
+                        Datos.tTR_Usuarios objdatos = new Datos.tTR_Usuarios();
+                        objdatos = (Datos.tTR_Usuarios)Session["LogeoUsuario"];
+                        
+                        if (objdatos != null)
+                        {
+                            ViewBag.sNombres = (string)Session["Nombres"];
+                            if (objdatos.iIdRol == 1)
+                            {
+                                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Categorias", "Index", "Categoria")</li>
+                                <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
+                                <li>@Html.ActionLink("Proveedores", "Index", "Proveedor")</li>
+                                <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+                                <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                            }
+                            else if (objdatos.iIdRol == 3)
+                            {
+                                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Categorias", "Index", "Categoria")</li>
+                                <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
+                                <li>@Html.ActionLink("Proveedores", "Index", "Proveedor")</li>
+
+                            }else
+                            {
+                                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                            }
+                        }else
+                        {
+                            Response.Redirect("/Login/Index");
+                        }
+
+                    }
+
+                </ul>
+            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Categorias", "Index", "Categoria")</li>
-                    <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
-                    <li>@Html.ActionLink("Proveedores", "Index", "Proveedor")</li>
-                    <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                    <li class="navbar-text">Hola,@ViewBag.sNombres </li> 
+                    <li>  @Html.ActionLink("Cerrar Sesión", "CerrarSession", "Login", null, new { @class = "" }) </li>
                 </ul>
             </div>
         </div>
@@ -33,9 +71,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal2" role="dialog">
@@ -43,7 +78,7 @@
             <div class="modal-content css-modal-border-redondo">
                 <div class="modal-header css-modal-header">
                     <div class="modal-title css-modal-title-text">
-                        Trabajo Final Cibertec 
+                        Trabajo Final Cibertec
                     </div>
                 </div>
                 <div class="modal-body">
@@ -68,7 +103,7 @@
             <div class="modal-content css-modal-border-redondo">
                 <div class="modal-header css-modal-heasder">
                     <div class="modal-title css-modal-title-text">
-                       Trabajo Final Cibertec 
+                        Trabajo Final Cibertec
                     </div>
                 </div>
                 <div class="modal-body">
@@ -87,8 +122,12 @@
             </div>
         </div>
     </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @*@RenderSection("scripts", required: true)*@
 </body>
+<footer>
+    <p style="text-align:center;">&copy; @DateTime.Now.Year - @ViewBag.LogHelper </p>
+</footer>
 </html>

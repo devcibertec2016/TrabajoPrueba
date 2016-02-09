@@ -22,7 +22,14 @@
                 @*@Html.ValidationMessageFor(model => model.iIdRol)*@
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Imagen</label>
+            <div class="col-md-10">
+                <input type="file" name="files" id="files" multiple="multiple" />
 
+                <div id="plImages"></div>
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-md-2">Usuario</label>
             <div class="col-md-10">
@@ -80,6 +87,24 @@
     @Html.ActionLink("Regresar", "Index")
 </div>
 @Scripts.Render("~/bundles/jquery")
-
-
 @Scripts.Render("~/scrp/usuarios")
+@Scripts.Render("~/bundles/fileupload") 
+<script>
+    $(document).on('ready', function () {
+        console.log('ready');
+        $('#files').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $.each(data.result, function (index, file) {
+                    var div = $("<div>");
+                    var img = $("<img>");
+                    img.attr("src", file.path);
+                    img.attr("width", 200);
+                    img.attr("height", 200);
+                    div.append(img);
+                    $("#plImages").append(div);
+                });
+            }
+        });
+    });
+</script>
