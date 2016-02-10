@@ -51,11 +51,15 @@ namespace Web_1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios)
+        public ActionResult Create([Bind(Include = "iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios, HttpPostedFileBase files)
         {
             ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)
             {
+                var fileName = string.Format("~/WebImage/{0}",
+                        files.FileName);
+                files.SaveAs(this.Server.MapPath(fileName));
+                ttr_usuarios.sRutaImagen = fileName; 
                 db.tTR_Usuarios.Add(ttr_usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -87,7 +91,7 @@ namespace Web_1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios)
+        public ActionResult Edit([Bind(Include = "iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios)
         {
             ViewBag.LogHelper = LogHelper.Log.WriteFooter();
             if (ModelState.IsValid)

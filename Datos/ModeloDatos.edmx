@@ -59,6 +59,7 @@
           <Property Name="vNombre" Type="varchar" MaxLength="100" />
           <Property Name="vApellidos" Type="varchar" MaxLength="250" />
           <Property Name="iEstado" Type="int" />
+          <Property Name="sRutaImagen" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Rol_User">
           <End Role="tTR_Roles" Type="Self.tTR_Roles" Multiplicity="0..1" />
@@ -222,6 +223,7 @@
           <Property Name="vApellidos" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="iEstado" Type="Int32" />
           <NavigationProperty Name="tTR_Roles" Relationship="DB_Trabajo_1Model.FK_Rol_User" FromRole="tTR_Usuarios" ToRole="tTR_Roles" />
+          <Property Name="sRutaImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Rol_User">
           <End Type="DB_Trabajo_1Model.tTR_Roles" Role="tTR_Roles" Multiplicity="0..1" />
@@ -291,6 +293,7 @@
           <EntitySetMapping Name="tTR_Usuarios">
             <EntityTypeMapping TypeName="DB_Trabajo_1Model.tTR_Usuarios">
               <MappingFragment StoreEntitySet="tTR_Usuarios">
+                <ScalarProperty Name="sRutaImagen" ColumnName="sRutaImagen" />
                 <ScalarProperty Name="iEstado" ColumnName="iEstado" />
                 <ScalarProperty Name="vApellidos" ColumnName="vApellidos" />
                 <ScalarProperty Name="vNombre" ColumnName="vNombre" />

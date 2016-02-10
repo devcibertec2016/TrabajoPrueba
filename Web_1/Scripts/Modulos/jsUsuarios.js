@@ -75,12 +75,18 @@ function fnValidaCampos() {
     var sPassword = $("#vPassword").val();
     var sNombre = $("#vNombre").val();
     var sApellidos = $("#vApellidos").val();
+    var file = $("#files").val();
 
     if ($.trim(ddlRol) == 0) {
         br = true;
         $("#hddMessage").append("Por favor seleccione el rol del usuario a registrar <br/>");
     }
 
+    if ($.trim(file).length == 0)
+    {
+        br = true;
+        $("#hddMessage").append("Agrega una imagen <br/>");
+    }
     if ($.trim(sNombreUsuario).length == 0) {
         br = true;
         $("#hddMessage").append("Por favor escriba el nombre de usuario <br/>");

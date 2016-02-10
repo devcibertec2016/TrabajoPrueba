@@ -21,6 +21,7 @@ namespace Datos
         public string vNombre { get; set; }
         public string vApellidos { get; set; }
         public Nullable<int> iEstado { get; set; }
+        public string sRutaImagen { get; set; }
     
         public virtual tTR_Roles tTR_Roles { get; set; }
     }

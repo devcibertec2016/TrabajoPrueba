@@ -23,7 +23,6 @@ namespace Datos
         public string vNombreRol { get; set; }
         public Nullable<int> iEstado { get; set; }
         public int iEstadoEliminar { get; set; }
-    
         public virtual ICollection<tTR_Usuarios> tTR_Usuarios { get; set; }
     }
 }

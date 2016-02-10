@@ -23,7 +23,7 @@ namespace Datos
         public string vNombreCategoria { get; set; }
         public Nullable<int> iEstado { get; set; }
         public int iEstadoEliminar { get; set; }
-
+    
         public virtual ICollection<tTR_Producto> tTR_Producto { get; set; }
     }
 }

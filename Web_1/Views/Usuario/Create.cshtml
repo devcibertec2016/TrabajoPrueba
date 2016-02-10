@@ -7,13 +7,13 @@
 <h2>Crear Nuevo Usuario</h2>
 
 
-@using (Html.BeginForm(null, null, null, FormMethod.Post, new { id = "RegistrarUsuario" }))
+@using (Html.BeginForm(null, null, null, FormMethod.Post, new { id = "RegistrarUsuario", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true)
+        @Html.ValidationSummary(false)
 
         <div class="form-group">
             <label class="control-label col-md-2">Rol</label>
@@ -25,9 +25,11 @@
         <div class="form-group">
             <label class="control-label col-md-2">Imagen</label>
             <div class="col-md-10">
+                <div>
+                    <img id="imgPreview" width="80" height="80" />
+                </div>
                 <input type="file" name="files" id="files" multiple="multiple" />
 
-                <div id="plImages"></div>
             </div>
         </div>
         <div class="form-group">
@@ -37,7 +39,6 @@
                 @*@Html.ValidationMessageFor(model => model.vNombreUsuario)*@
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">Contraseña</label>
             <div class="col-md-10">
@@ -45,7 +46,6 @@
                 @*@Html.ValidationMessageFor(model => model.vPassword)*@
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">Nombre</label>
             <div class="col-md-10">
@@ -53,7 +53,6 @@
                 @*@Html.ValidationMessageFor(model => model.vNombre)*@
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">Apellidos</label>
             <div class="col-md-10">
@@ -61,8 +60,6 @@
                 @*@Html.ValidationMessageFor(model => model.vApellidos)*@
             </div>
         </div>
-
-
         <div class="form-group">
             <label class="control-label col-md-2">Estado</label>
             <div class="col-md-10">
@@ -74,37 +71,59 @@
                 @*@Html.ValidationMessageFor(model => model.iEstado)*@
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="btnRegistrar" type="button" value="Create" class="btn btn-default" />
             </div>
         </div>
+        
     </div>
 }
+
+
+
 
 <div>
     @Html.ActionLink("Regresar", "Index")
 </div>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/scrp/usuarios")
-@Scripts.Render("~/bundles/fileupload") 
-<script>
-    $(document).on('ready', function () {
-        console.log('ready');
-        $('#files').fileupload({
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result, function (index, file) {
-                    var div = $("<div>");
-                    var img = $("<img>");
-                    img.attr("src", file.path);
-                    img.attr("width", 200);
-                    img.attr("height", 200);
-                    div.append(img);
-                    $("#plImages").append(div);
-                });
-            }
+@section Scripts {
+    <script src="~/Scripts/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.iframe-transport.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script>
+       
+    //$('#files').fileupload({
+    //  //  dataType: 'json',
+    //    //done: function (e, data) {
+    //    //    $.each(data.result, function (index, file) {
+    //    //        var div = $("<div>");
+    //    //        var img = $("<img>");
+    //    //        img.attr("src", file.path);
+    //    //        img.attr("width", 200);
+    //    //        img.attr("height", 200);
+    //    //        div.append(img);
+    //    //        $("#plImages").append(div);
+    //    //    });
+    //    //}
+    //});
+        $(function () {
+            $("#files").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#imgPreview").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    $("#imgPreview").attr('src', 'placeholder.png');
+                }
+            });
         });
-    });
-</script>
+    </script>
+}
+
+
+
+

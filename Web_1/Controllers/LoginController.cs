@@ -19,12 +19,11 @@ namespace Web_1.Controllers
             return View();
         }
 
-        public void ValidaLogeo()
+        public ActionResult ValidaLogeo()
         {
             //UsuarioController objUsuarioController = null;
             List<tTR_Usuarios> loenUsuario = null;
             tTR_Usuarios objUsuarios = null;
-            int iEstado = 0;
             try
             {
                 loenUsuario = new List<tTR_Usuarios>();
@@ -47,37 +46,26 @@ namespace Web_1.Controllers
                         objUsuarios.iIdRol = item.iIdRol;
                         objUsuarios.iEstado = item.iEstado;
                     }
-                    iEstado = 1;
                     Session["LogeoUsuario"] = objUsuarios;
                     Session["Nombres"] = objUsuarios.vNombre + " " + objUsuarios.vApellidos;
-                    Response.Redirect("~/Home/Index");
                     ViewBag.ValidaLogeo = "Validación correcta";
+                    //Response.Redirect("/Home/Index");
                 }
                 else
                 {
-                    Response.Redirect("~/Login/Index");
-                    iEstado = 0;
+                   // Response.Redirect("/Login/Index");
                     ViewBag.ValidaLogeo = "El usuario y/o password son incorrectos, verifique con el administrador si el usuario se encuentra activo";
                 }
-                //var Query = (from Registro in db.tTR_Usuarios 
-                //               where  Registro.vNombreUsuario == sUser.ToString() 
-                //                   && Registro.vPassword == sPassword.ToString() 
-                //                   && Registro.iEstado == 1
-                //                 select Registro);
-                //loenUsuario = Query.ToList();
-               
-              
+                            
 
             }
             catch (Exception ex)
             {
                 throw ex;
-                iEstado = 0;
-                Response.Redirect("~/Login/Index");
                
             }
 
-           
+            return Redirect("/Home/Index");
         }
 
         public ActionResult CerrarSession()
