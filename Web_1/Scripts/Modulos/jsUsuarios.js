@@ -82,11 +82,11 @@ function fnValidaCampos() {
         $("#hddMessage").append("Por favor seleccione el rol del usuario a registrar <br/>");
     }
 
-    if ($.trim(file).length == 0)
-    {
-        br = true;
-        $("#hddMessage").append("Agrega una imagen <br/>");
-    }
+    //if ($.trim(file).length == 0)
+    //{
+    //    br = true;
+    //    $("#hddMessage").append("Agrega una imagen <br/>");
+    //}
     if ($.trim(sNombreUsuario).length == 0) {
         br = true;
         $("#hddMessage").append("Por favor escriba el nombre de usuario <br/>");

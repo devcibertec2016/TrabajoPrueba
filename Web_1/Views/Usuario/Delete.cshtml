@@ -65,6 +65,14 @@
             @Html.DisplayFor(model => model.tTR_Roles.vNombreRol)
         </dd>
 
+        <dt>
+            Imagen
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.sRutaImagen)" alt="image" />
+        </dd>
+
     </dl>
 
    @using (Html.BeginForm(null, null, null, FormMethod.Post, new { id = "EliminarUsuario" }))

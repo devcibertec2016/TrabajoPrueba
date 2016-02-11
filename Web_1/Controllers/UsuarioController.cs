@@ -54,12 +54,20 @@ namespace Web_1.Controllers
         public ActionResult Create([Bind(Include = "iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios, HttpPostedFileBase files)
         {
             ViewBag.LogHelper = LogHelper.Log.WriteFooter();
+            string urlLocal = "../..";
             if (ModelState.IsValid)
             {
-                var fileName = string.Format("~/WebImage/{0}",
-                        files.FileName);
-                files.SaveAs(this.Server.MapPath(fileName));
-                ttr_usuarios.sRutaImagen = fileName; 
+                if (files == null && ttr_usuarios.sRutaImagen == null)
+                {
+                    ttr_usuarios.sRutaImagen = "../../WebImage/no_image.png";
+                }
+                else
+                {
+                    var fileName = string.Format("/WebImage/{0}",
+                             files.FileName);
+                    files.SaveAs(this.Server.MapPath(fileName));
+                    ttr_usuarios.sRutaImagen = urlLocal + fileName;
+                }
                 db.tTR_Usuarios.Add(ttr_usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,11 +99,23 @@ namespace Web_1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios)
+        public ActionResult Edit([Bind(Include = "iIdUsuario,iIdRol,vNombreUsuario,vPassword,vNombre,vApellidos,iEstado")] tTR_Usuarios ttr_usuarios, HttpPostedFileBase files)
         {
             ViewBag.LogHelper = LogHelper.Log.WriteFooter();
+            string urlLocal = "../..";
             if (ModelState.IsValid)
             {
+                if (files == null && ttr_usuarios.sRutaImagen ==null)
+                {
+                    ttr_usuarios.sRutaImagen = "../../WebImage/no_image.png";
+                }
+                else
+                {
+                    var fileName = string.Format("/WebImage/{0}",
+                             files.FileName);
+                    files.SaveAs(this.Server.MapPath(fileName));
+                    ttr_usuarios.sRutaImagen = urlLocal + fileName;
+                }
                 db.Entry(ttr_usuarios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
