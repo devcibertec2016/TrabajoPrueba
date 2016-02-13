@@ -14,7 +14,7 @@ namespace Web_1.Controllers
     {
         private DB_Trabajo_1Entities3 db = new DB_Trabajo_1Entities3();
 
-        // GET: /Categoria/
+        // GET: /Categoria__/
         public ActionResult Index()
         
         {
