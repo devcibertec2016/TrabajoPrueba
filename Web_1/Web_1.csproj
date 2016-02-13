@@ -49,9 +49,6 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="LogHelper">
-      <HintPath>..\..\Visual Studio 2013\Projects\LogHelper\LogHelper\bin\Debug\LogHelper.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
@@ -229,6 +226,10 @@
     <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LogHelper-master\LogHelper\LogHelper.csproj">
+      <Project>{3a26efbb-3911-454a-9654-9af98cfe8309}</Project>
+      <Name>LogHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Datos\Datos.csproj">
       <Project>{69bc4584-93fc-4745-8a44-9e9e041e1c2e}</Project>
       <Name>Datos</Name>
