@@ -4,6 +4,7 @@ param(
 )
 
 
+
 ####
 #### Function to generate all available xml/config transformations and put them all on the package output directory
 ####
@@ -105,7 +106,9 @@ function TransFormXmlConfigFiles([string]$projectFilePath,[string]$configDestina
 }
 
 $msbuild = "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe"
+
 $current =  "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+
 $projectFilePath = join-path $current "\Web_1\Web_1.csproj"
 $package_config_path = join-path $current "\Build\tools\config"
 if ( -not ( Test-Path ".\Build") )
@@ -137,3 +140,9 @@ $xml.SelectNodes("//version") | % {
 
 $xml.Save($nuget_path)
 
+
+cd ".\Build"
+
+& choco pack app.nuspec --version=$version
+
+cd $current
